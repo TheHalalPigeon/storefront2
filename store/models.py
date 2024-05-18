@@ -10,13 +10,13 @@ class Promotion(models.Model):
 class Collection(models.Model):
     title = models.CharField(max_length=255)
     featured_product = models.ForeignKey(
-        'Product', on_delete=models.SET_NULL, null=True, related_name='+', blank=True)
+        "Product", on_delete=models.SET_NULL, null=True, related_name="+", blank=True)
 
     def __str__(self) -> str:
         return self.title
 
     class Meta:
-        ordering = ['title']
+        ordering = ["title"]
 
 
 class Product(models.Model):
@@ -26,7 +26,8 @@ class Product(models.Model):
     unit_price = models.DecimalField(
         max_digits=6,
         decimal_places=2,
-        validators=[MinValueValidator(1)])
+        validators=[MinValueValidator(1)]
+    )
     inventory = models.IntegerField(validators=[MinValueValidator(0)])
     last_update = models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
@@ -36,18 +37,18 @@ class Product(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['title']
+        ordering = ["title"]
 
 
 class Customer(models.Model):
-    MEMBERSHIP_BRONZE = 'B'
-    MEMBERSHIP_SILVER = 'S'
-    MEMBERSHIP_GOLD = 'G'
+    MEMBERSHIP_BRONZE = "B"
+    MEMBERSHIP_SILVER = "S"
+    MEMBERSHIP_GOLD = "G"
 
     MEMBERSHIP_CHOICES = [
-        (MEMBERSHIP_BRONZE, 'Bronze'),
-        (MEMBERSHIP_SILVER, 'Silver'),
-        (MEMBERSHIP_GOLD, 'Gold'),
+        (MEMBERSHIP_BRONZE, "Bronze"),
+        (MEMBERSHIP_SILVER, "Silver"),
+        (MEMBERSHIP_GOLD, "Gold"),
     ]
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -58,20 +59,20 @@ class Customer(models.Model):
         max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f"{self.first_name} {self.last_name}"
 
     class Meta:
-        ordering = ['first_name', 'last_name']
+        ordering = ["first_name", "last_name"]
 
 
 class Order(models.Model):
-    PAYMENT_STATUS_PENDING = 'P'
-    PAYMENT_STATUS_COMPLETE = 'C'
-    PAYMENT_STATUS_FAILED = 'F'
+    PAYMENT_STATUS_PENDING = "P"
+    PAYMENT_STATUS_COMPLETE = "C"
+    PAYMENT_STATUS_FAILED = "F"
     PAYMENT_STATUS_CHOICES = [
-        (PAYMENT_STATUS_PENDING, 'Pending'),
-        (PAYMENT_STATUS_COMPLETE, 'Complete'),
-        (PAYMENT_STATUS_FAILED, 'Failed')
+        (PAYMENT_STATUS_PENDING, "Pending"),
+        (PAYMENT_STATUS_COMPLETE, "Complete"),
+        (PAYMENT_STATUS_FAILED, "Failed")
     ]
 
     placed_at = models.DateTimeField(auto_now_add=True)
