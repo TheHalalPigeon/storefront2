@@ -69,7 +69,7 @@ class CollectionAdmin(admin.ModelAdmin):
                 "collection__id": str(collection.id)
             })
         )
-        return format_html("<a href="{}">{} Products</a>", url, collection.products_count)
+        return format_html("<a href='{}'>{} Products</a>", url, collection.products_count)
 
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(
@@ -93,7 +93,7 @@ class CustomerAdmin(admin.ModelAdmin):
             + urlencode({
                 "customer__id": str(customer.id)
             }))
-        return format_html("<a href="{}">{} Orders</a>", url, customer.orders_count)
+        return format_html("<a href='{}'>{} Orders</a>", url, customer.orders_count)
 
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(
