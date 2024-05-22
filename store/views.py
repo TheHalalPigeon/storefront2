@@ -71,6 +71,7 @@ class CartViewSet(CreateModelMixin,
     serializer_class = CartSerializer
 
 class CartItemViewSet(ModelViewSet):
+    # DELETE
     http_method_names = ["get", "post", "patch", "delete"]
 
     def get_serializer_class(self):
